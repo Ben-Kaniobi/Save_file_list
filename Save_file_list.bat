@@ -88,5 +88,6 @@ ECHO.
 PAUSE
 
 REM Sources:
+REM http://en.wikibooks.org/wiki/Windows_Batch_Scripting
 REM http://www.howtogeek.com/98064/how-to-print-or-save-a-directory-listing-to-a-file/
 REM http://superuser.com/questions/32771/list-all-files-in-all-subfolders
