@@ -14,7 +14,7 @@ IF EXIST "%filepath%%filename%.txt" (
 
 :label_userinput1
 REM Get user input
-SET /P user_input="%filename%.txt" already exists, do you want to overwrite it? [Y/N]:
+SET /P user_input=""%filename%.txt" already exists, do you want to overwrite it? [Y/N]:"
 REM Check user input
 IF %user_input% == Y (
 	GOTO :label_filename_ok
@@ -49,7 +49,7 @@ SET filename=%filename%_%i%
 
 :label_userinput2
 REM Get user input
-SET /P user_input=Include subfolders? [Y/N]:
+SET /P user_input="Include subfolders? [Y/N]:"
 REM Check user input
 IF %user_input% == Y (
 	GOTO :label_include_subfolders
