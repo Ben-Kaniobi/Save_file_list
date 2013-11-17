@@ -1,10 +1,12 @@
 @ECHO off
 SETLOCAL
 
-REM Get name of this file
+REM Get name and path of this file
 SET filename=%~n0
+SET filepath=%~d0%~p0
+CD "%filepath%"
 REM Check if a textfile with this name already file exists
-IF EXIST %filename%.txt (
+IF EXIST "%filepath%%filename%.txt" (
 	GOTO :label_userinput1
 ) ELSE (
 	GOTO :label_filename_ok
@@ -12,7 +14,7 @@ IF EXIST %filename%.txt (
 
 :label_userinput1
 REM Get user input
-SET /P user_input=%filename%.txt already exists, do you want to overwrite it? [Y/N]:
+SET /P user_input="%filename%.txt" already exists, do you want to overwrite it? [Y/N]:
 REM Check user input
 IF %user_input% == Y (
 	GOTO :label_filename_ok
@@ -34,7 +36,7 @@ IF %user_input% == n (
 REM Add a number to the filename (e.g. file_1.txt)
 SET i=1
 :label_while1
-IF NOT EXIST %filename%_%i%.txt (
+IF NOT EXIST "%filepath%%filename%_%i%.txt" (
 	GOTO :label_endwhile1
 )
 REM Increment i
@@ -68,19 +70,19 @@ IF %user_input% == n (
 :label_include_subfolders
 ECHO.
 REM Include subfolders and all files:
-DIR /s /b > %filename%.txt || REM When using "|| REM" errorlevel is correctly set
+DIR /s /b > "%filepath%%filename%.txt" || REM When using "|| REM" errorlevel is correctly set
 GOTO :label_end
 
 :label_exclude_subfolders
 ECHO.
 REM Only files and folders in this folder:
-DIR /b > %filename%.txt || REM When using "|| REM" errorlevel is correctly set
+DIR /b > "%filepath%%filename%.txt" || REM When using "|| REM" errorlevel is correctly set
 GOTO :label_end
 
 :label_end
 REM Check for errors
 IF %errorlevel% == 0 (
-	ECHO %filename%.txt created.
+	ECHO "%filename%.txt" created.
 )
 
 REM Wait for user to close
