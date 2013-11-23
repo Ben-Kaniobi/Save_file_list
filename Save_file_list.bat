@@ -33,14 +33,18 @@ IF %user_input% == n (
 ))))
 
 :label_filename_not_ok
-REM Add a number to the filename (e.g. file_1.txt)
+REM Add a number to the filename (e.g. replace "file" with "file_1")
 SET i=1
 :label_while1
-IF NOT EXIST "%filepath%%filename%_%i%.txt" (
+IF EXIST "%filepath%%filename%_%i%.txt" (
+	REM Continue while
+) ELSE (
 	GOTO :label_endwhile1
 )
-REM Increment i
-SET /A i = %i% + 1
+REM While body
+	REM Increment i
+	SET /A i = %i% + 1
+REM End of while body
 GOTO :label_while1
 :label_endwhile1
 SET filename=%filename%_%i%
